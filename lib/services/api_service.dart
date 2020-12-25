@@ -44,18 +44,24 @@ class ApiService {
         body: jsonEncode(body));
   }
 
-  void wake() async {
-    var response = await _post(
-        path: "wake", body: <String, dynamic>{"mac": repository.machineMac});
+  bool isSuccess(http.Response response) {
+    return response.statusCode >= 200 && response.statusCode < 300;
   }
 
-  void halt() async {
+  Future<bool> wake() async {
+    var response = await _post(
+        path: "wake", body: <String, dynamic>{"mac": repository.machineMac});
+    return isSuccess(response);
+  }
+
+  Future<bool> halt() async {
     var response = await _post(path: "halt", body: <String, dynamic>{
       "user": repository.machineUser,
       "host": repository.machineAddress,
       "port": repository.machineSshPort,
       "private_key": {"path": repository.machineSshKeyPath}
     });
+    return isSuccess(response);
   }
 
   void dispose() {

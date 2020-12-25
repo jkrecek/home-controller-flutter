@@ -34,20 +34,24 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   Stream<DashboardState> _mapDashboardLoadedToState(
       DashboardLoaded event) async* {
-    yield DashboardLoadSuccess(event.isOnline, false);
+    yield DashboardLoadSuccess(isOnline: event.isOnline, isLoading: false);
   }
 
   Stream<DashboardState> _mapDashboardStartDeviceToState(
       DashboardStartDevice event) async* {
     assert(state is DashboardLoadSuccess);
-    yield DashboardLoadSuccess((state as DashboardLoadSuccess).isOnline, true);
-    apiService.wake();
+    yield (state as DashboardLoadSuccess).copyWith(isLoading: true);
+    var success = await apiService.wake();
+    yield (state as DashboardLoadSuccess)
+        .copyWith(isLoading: false, commandFailed: !success);
   }
 
   Stream<DashboardState> _mapDashboardStopDeviceToState(
       DashboardStopDevice event) async* {
     assert(state is DashboardLoadSuccess);
-    yield DashboardLoadSuccess((state as DashboardLoadSuccess).isOnline, true);
-    apiService.halt();
+    yield (state as DashboardLoadSuccess).copyWith(isLoading: true);
+    var success = await apiService.halt();
+    yield (state as DashboardLoadSuccess)
+        .copyWith(isLoading: false, commandFailed: !success);
   }
 }
