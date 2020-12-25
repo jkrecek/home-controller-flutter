@@ -17,7 +17,7 @@ class ConfigurationRepository {
   }
 
   set controllerHost(String host) {
-    preferences.getString(prefsKeyControllerHost);
+    preferences.setString(prefsKeyControllerHost, host);
   }
 
   String get machineAddress {
@@ -25,7 +25,7 @@ class ConfigurationRepository {
   }
 
   set machineAddress(String address) {
-    preferences.getString(prefsKeyMachineAddress);
+    preferences.setString(prefsKeyMachineAddress, address);
   }
 
   String get machineMac {
@@ -33,7 +33,7 @@ class ConfigurationRepository {
   }
 
   set machineMac(String mac) {
-    preferences.getString(prefsKeyMachineMac);
+    preferences.setString(prefsKeyMachineMac, mac);
   }
 
   String get machineSshKeyPath {
@@ -41,7 +41,7 @@ class ConfigurationRepository {
   }
 
   set machineSshKeyPath(String sshKeyPath) {
-    preferences.getString(prefsKeyMachineSshKeyPath);
+    preferences.setString(prefsKeyMachineSshKeyPath, sshKeyPath);
   }
 
   int get machineSshPort {
@@ -49,7 +49,7 @@ class ConfigurationRepository {
   }
 
   set machineSshPort(int port) {
-    preferences.getInt(prefsKeyMachineSshPort);
+    preferences.setInt(prefsKeyMachineSshPort, port);
   }
 
   String get machineUser {
@@ -57,6 +57,6 @@ class ConfigurationRepository {
   }
 
   set machineUser(String user) {
-    preferences.getString(prefsKeyMachineUser);
+    preferences.setString(prefsKeyMachineUser, user);
   }
 }

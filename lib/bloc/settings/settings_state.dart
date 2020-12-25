@@ -34,21 +34,4 @@ class SettingsLoaded extends SettingsState {
         machineSshPort,
         machineUser
       ];
-
-  SettingsLoaded copyWith(
-      {String controllerHost,
-      String machineAddress,
-      String machineMac,
-      String machineUser,
-      int machineSshPort,
-      String machineSshKeyPath}) {
-    return SettingsLoaded(
-      controllerHost: controllerHost ?? this.controllerHost,
-      machineAddress: machineAddress ?? this.machineAddress,
-      machineMac: machineMac ?? this.machineMac,
-      machineUser: machineUser ?? this.machineUser,
-      machineSshPort: machineSshPort ?? this.machineSshPort,
-      machineSshKeyPath: machineSshKeyPath ?? this.machineSshKeyPath,
-    );
-  }
 }
